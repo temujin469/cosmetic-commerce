@@ -19,7 +19,7 @@ function cart() {
 
   return (
     <Layout title="Таний сагс">
-      <div className="mt-0 p-4">
+      <div className="mt-0 p-5">
         {cartItemsQuantity === 0 ? (
           <div className="flex flex-col items-center">
             <div className="">
@@ -43,7 +43,7 @@ function cart() {
                   <div key={item.slug} className="flex gap-2 border-b pb-2">
                     <Link href={`product/${item.slug}`}>
                       <img
-                        className="w-28 h-28 rounded-md bborder object-cover cursor-pointer"
+                        className="w-24 h-24 rounded-md bborder object-cover cursor-pointer"
                         src={item.image}
                       />
                     </Link>
@@ -98,7 +98,7 @@ function cart() {
               <div className="flex flex-col gap-3">
                 <div className="flex items-center h-12 border-primary border-2 rounded-md">
                   <input
-                    className="rounded-l outline-none flex-1 px-2"
+                    className="rounded-l outline-none w-full px-2"
                     placeholder="Промо код оруулах"
                   />
                   <button className="rounded-r bg-gray-200 h-full px-2">Ашиглах</button>
@@ -106,9 +106,8 @@ function cart() {
                 <div className="flex justify-between items-center">
                   <div>
                     <h2>Хүргэлт</h2>
-                    <p>
-                      Захиалга баталгаажсанаас хойш 24 цагийн хугацаанд
-                      хүргэгдэнэ. (100,000₮-с дээш хүргэлт үнэгүй)
+                    <p className="pr-3">
+                      100,000₮-с дээш хүргэлт үнэгүй
                     </p>
                   </div>
                   <p className="text-xl text-gray-900">4000</p>
@@ -132,8 +131,8 @@ function cart() {
                 </div>
                 <hr />
                 <div className="flex justify-between items-center">
-                  <p className="text-xl text-gray-800">Нийт төлөх</p>
-                  <p className="text-xl text-primary">8000₮</p>
+                  <p className="text-2xl text-gray-800">Нийт төлөх</p>
+                  <p className="text-2xl text-primary">8000₮</p>
                 </div>
                 <button className="primary-button">Захиалах</button>
               </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import {A11y } from 'swiper';
+
 import { categories } from "../utils/data";
 import Link from "next/link";
 
@@ -11,6 +13,7 @@ function Categories() {
       <Swiper
         spaceBetween={10}
         slidesPerView={3}
+        modules={[A11y]}
       >
           {categories.map((cat) => (
             <SwiperSlide key={cat.id}>
