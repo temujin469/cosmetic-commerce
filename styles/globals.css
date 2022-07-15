@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+  @apply block rounded-md shadow overflow-hidden max-w-[300px] hover:shadow-xl;
+}
+
+.primary-button {
+  @apply bg-primary text-lg font-medium rounded-md text-white py-3 px-4 outline-none hover:bg-[#46bebe] active:shadow-md;
+}
+.saaral-button {
+  @apply bg-gray-200 text-lg hover:bg-gray-100 font-medium rounded-md text-gray-800 py-3 px-4 outline-none active:shadow-md;
+}
+.jijig-saaral-button {
+  @apply bg-gray-200 hover:bg-gray-100 font-medium rounded text-gray-800 px-2 py-1 outline-none active:shadow-md;
+}
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
