@@ -13,7 +13,7 @@ function Collapse({ title, content }: Props) {
         onClick={() => setShow(!show)}
         className="flex justify-between items-center cursor-pointer"
       >
-        <p className="text-base leading-4 text-gray-800">{title}</p>
+        <p className="text-xl font-medium md:text-2xl leading-4 text-gray-800">{title}</p>
         <button
           className="cursor-pointer rounded bg-gray-200 p-2"
           aria-label="show or hide"

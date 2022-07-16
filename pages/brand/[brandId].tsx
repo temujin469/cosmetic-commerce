@@ -26,7 +26,7 @@ function brandScreen() {
         <div className="left-5 bottom-5 text-white text-lg md:text-2xl md:left-8 md:bottom-8 absolute bg-black/20 flex items-center space-x-4 p-2 md:p-3 rounded">
           <img
             src={brand?.image}
-            className="w-16 h-16 md:w-20 md:h-20 rounded-full"
+            className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover"
           />
           <p>{brand?.name}</p>
         </div>
@@ -41,7 +41,7 @@ function brandScreen() {
           <select
             name="cars"
             id="cars"
-            className="rounded-md border p-3 outline-none bg-gray-100"
+            className="rounded-md border p-3 outline-none font-medium bg-gray-100"
           >
             <option value="volvo">Шинэ эхэндээ</option>
             <option value="saab">Хуучин эхэндээ</option>

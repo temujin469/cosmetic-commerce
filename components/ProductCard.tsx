@@ -12,7 +12,7 @@ export default function ProductCard({ product }: Product | any) {
         <Link href={`/product/${product.slug}`}>
           <a>
             <img
-              src={product.image}
+              src={product.images[0]}
               alt={product.name}
               className="shadow h-40 w-full object-cover"
             />

@@ -2,7 +2,7 @@ export type Product = {
   name: string
   slug: string
   catId: string
-  image: string
+  images: string[]
   isFeatured:boolean,
   price: number
   brandId:string

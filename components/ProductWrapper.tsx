@@ -8,7 +8,7 @@ function ProductWrapper() {
   };
 
   return (
-    <div className="bg-white pt-0 p-5 space-y-4">
+    <div className="bg-white pt-0 p-5">
       {categories.map((cat) => {
         const products = filteredProducts(cat.id);
 
@@ -16,7 +16,7 @@ function ProductWrapper() {
           return (
             <div key={cat.id}>
               <div>
-                <h1 className="text-xl text-gray-800 font-medium py-3">
+                <h1 className="text-xl md:text-2xl text-gray-800 font-medium pb-3">
                   {cat.name}
                 </h1>
               </div>

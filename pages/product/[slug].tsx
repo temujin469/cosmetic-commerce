@@ -38,33 +38,32 @@ function ProductScreen() {
     if (product.countInStock != 0) {
       const cartItem: CartItem = {
         slug: product.slug,
-        image: product.image,
+        image: product.images[0],
         price: product.price,
         name: product.name,
         brand: {
-          id:brand?.id,
+          id: brand?.id,
           name: brand?.name,
           image: brand?.image,
         },
         quantity,
       };
       addToCart(dispatch, cartItem);
-      return toast.success("Сагсанд амжилттай нэмэгдлээ",{
+      return toast.success("Сагсанд амжилттай нэмэгдлээ", {
         style: {
-          border: '1px solid green',
-          padding: '16px',
-          color: 'green',
+          border: "1px solid green",
+          padding: "16px",
+          color: "green",
         },
       });
-    }
-    else{
-      return toast.error("Энэ бүтээгдхүүн дууссан байна",{
+    } else {
+      return toast.error("Энэ бүтээгдхүүн дууссан байна", {
         style: {
-          border: '1px solid red',
-          padding: '16px',
-          color: 'red',
+          border: "1px solid red",
+          padding: "16px",
+          color: "red",
         },
-      })
+      });
     }
   };
   return (
@@ -72,8 +71,8 @@ function ProductScreen() {
       <div className="p-2">
         <Link href="/">Буцах</Link>
       </div>
-      <div className="grid md:grid-cols-4 gap-5 md:gap-10 lg:gap-20 bg-white p-4">
-        <div className="md:col-span-2 overflow-hidden border p-1 md:border-2 rounded-md md:p-2 lg:p-5 h-fit">
+      <div className="grid sm:grid-cols-4 gap-5 md:gap-10 lg:gap-20 bg-white p-4">
+        <div className="sm:col-span-2 h-fit">
           {/* <Image
             src={product.image}
             alt={product.name}
@@ -81,33 +80,49 @@ function ProductScreen() {
             height={640}
             layout="responsive"
           /> */}
-          <img src={product.image} alt={product.name} className="w-full" />
+          <img
+            src={product.images[0]}
+            alt={product.name}
+            className="max-w-[500px] w-full max-h-80 sm:max-h-[320px] md:max-h-96 lg:max-h-[550px] overflow-hidden border lg:border-2 rounded-md sm:p-2 lg:p-5 object-cover"
+          />
+          <div className="flex items-center gap-2 md:gap-4">
+            {product.images.map((image, i) => (
+              <img
+                src={image}
+                key={i}
+                alt="product-images"
+                className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mt-2 md:mt-4 border rounded-md object-cover"
+              />
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 md:col-span-2">
+        <div className="flex flex-col gap-4 sm:col-span-2">
           <ul className="space-y-1">
             <li className="flex items-center space-x-2">
               <Link href={`brand/${brand?.id}`}>
-                <img
-                  className="w-10 h-10 rounded-full border-2"
-                  src={brand?.image}
-                  alt={brand?.name}
-                />
+                <a>
+                  <img
+                    className="w-10 h-10 rounded-full border-2 object-cover"
+                    src={brand?.image}
+                    alt={brand?.name}
+                  />
+                </a>
               </Link>
-              <h1 className="text-xl font-medium">{brand?.name}</h1>
+              <h1 className="text-lg md:text-xl">{brand?.name}</h1>
             </li>
             <li>
-              <h1 className="md:text-2xl text-lg font-semibold text-gray-800">
+              <h1 className="md:text-2xl text-xl font-medium text-gray-800">
                 {product.name}
               </h1>
             </li>
             <li>
-              <h1 className="md:text-2xl text-lg font-semibold text-gray-800">
+              <h1 className="md:text-2xl text-xl font-medium text-gray-800">
                 ₮{product.price}
               </h1>
             </li>
             <li>
               {product.countInStock ? (
-                <h1 className="md:text-2xl text-lg font-semibold text-gray-800">
+                <h1 className="md:text-2xl text-xl font-medium text-gray-800">
                   {product.countInStock} Ширхэг үлдсэн
                 </h1>
               ) : (

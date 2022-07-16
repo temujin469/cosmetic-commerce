@@ -24,8 +24,8 @@ export const products: Product[] = [
     isFeatured: true,
     slug: "free-shirt",
     catId: "Shirts",
-    image:
-      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    images:
+      ["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60","https://images.unsplash.com/photo-1617897903246-719242758050?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y29zbWV0aWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60","https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60","https://images.unsplash.com/photo-1617897903246-719242758050?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y29zbWV0aWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"],
     price: 70,
     brandId: "Nike",
     rating: 4.5,
@@ -39,8 +39,8 @@ export const products: Product[] = [
     isFeatured: true,
     slug: "fit-shirt",
     catId: "Shirts",
-    image:
-      "https://images.unsplash.com/photo-1556227834-09f1de7a7d14?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29zbWV0aWMlMjBwcm9kdWN0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    images:
+      ["https://images.unsplash.com/photo-1556227834-09f1de7a7d14?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29zbWV0aWMlMjBwcm9kdWN0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"],
     price: 80,
     brandId: "Adidas",
     rating: 3.2,
@@ -54,8 +54,8 @@ export const products: Product[] = [
     isFeatured: true,
     slug: "slim-shirt",
     catId: "shirts",
-    image:
-      "https://images.unsplash.com/photo-1600852435574-9184cc5b55ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+    images:
+      ["https://images.unsplash.com/photo-1600852435574-9184cc5b55ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"],
     price: 90,
     brandId: "Puma",
     rating: 4.5,
@@ -68,8 +68,8 @@ export const products: Product[] = [
     isFeatured: true,
     slug: "golf-pants",
     catId: "Pants",
-    image:
-      "https://images.unsplash.com/photo-1556756483-7bf188a604e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    images:
+      ["https://images.unsplash.com/photo-1556756483-7bf188a604e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"],
     price: 90,
     brandId: "Puma",
     rating: 2.9,
@@ -83,8 +83,8 @@ export const products: Product[] = [
     isFeatured: false,
     slug: "fit-pants",
     catId: "Pants",
-    image:
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    images:
+      ["https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"],
     price: 95,
     brandId: "Zara",
     rating: 3.5,
@@ -97,8 +97,8 @@ export const products: Product[] = [
     isFeatured: false,
     slug: "classic-shirt",
     catId: "shirts",
-    image:
-      "https://images.unsplash.com/photo-1585232350744-974fc9804d65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    images:
+      ["https://images.unsplash.com/photo-1585232350744-974fc9804d65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"],
     price: 75,
     brandId: "Saihan",
     rating: 2.4,

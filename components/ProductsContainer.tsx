@@ -19,12 +19,43 @@ function ProductsContainer({ products }: Props) {
     //   </div>
     // </div>
     <Swiper
-      spaceBetween={20}
       slidesPerView={2}
+      breakpoints={{
+        270: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        350: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        640: {
+          // width:640,
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        768: {
+          // width: 768,
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+        900: {
+          // width: 900,
+          slidesPerView: 5,
+          spaceBetween: 20,
+        },
+        1070: {
+          // width: 1070,
+          slidesPerView: 6,
+          spaceBetween: 20,
+        },
+      }}
     >
       {products.map((product) => (
         <SwiperSlide>
-          <ProductCard product={product} key={product.slug} />
+          <div className="pb-8">
+            <ProductCard product={product} key={product.slug} />
+          </div>
         </SwiperSlide>
       ))}
     </Swiper>

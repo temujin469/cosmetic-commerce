@@ -15,13 +15,19 @@ function Banner() {
         modules={[Navigation, Pagination, A11y]}
         navigation
         pagination={{ clickable: true }}
+        breakpoints={{
+          1024: {
+            // width: 1070,
+            slidesPerView: 2,
+          },
+        }}
       >
         {banners.map((banner, index) => (
           <SwiperSlide key={index}>
             {
               <Link href={`#`}>
                 <a className="overflow-hidden">
-                  <img className="w-full h-full md:h-[500px] object-cover " src={banner.image} />
+                  <img className="w-full h-full md:h-[500px] object-cover" src={banner.image} />
                 </a>
               </Link>
             }

@@ -3,21 +3,21 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="p-4 bg-gray-700 sm:p-6 dark:bg-gray-700 space-y-5">
+    <div className="px-5 py-7 bg-gray-600 sm:p-6 dark:bg-gray-600 space-y-5">
       <div className="md:flex md:justify-between">
-        <div className="mb-6 md:mb-0">
+        <div className="mb-6 md:mb-0  md:inline-block  hidden">
           <a href="#" className="flex items-center">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
               className="mr-3 h-8"
               alt="FlowBite Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-primary">
+            <span className="self-centertext-2xl font-semibold whitespace-nowrap text-primary">
               Онлайн дэлгүүр
             </span>
           </a>
         </div>
-        <div className="grid grid-cols-2 md:gap-9">
+        <div className="flex items-center justify-between">
           <div>
             <h2 className="mb-6 text-sm font-semibold uppercase text-primary">
               Холбоосууд
@@ -30,7 +30,7 @@ function Footer() {
               </li>
               <li>
                 <a href="#" className="hover:underline">
-                  Бидний тухай  
+                  Бидний тухай
                 </a>
               </li>
             </ul>
@@ -47,25 +47,16 @@ function Footer() {
               </li>
               <li>
                 <a href="#" className="hover:underline">
-                  temvjin469@gmail.com
+                  temvjin469@gmail
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-center justify-between">
-        <span className="text-sm text-gray-500 sm:text-center">
-          © 2022{" "}
-          <Link href="/">
-            <a className="hover:underline">Онлайн дэлгүүр</a>
-          </Link>
-        </span>
+      <div className="flex flex-col md:flex-row items-center justify-between gap-5">
         <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-          <a
-            href="#"
-            className="text-gray-500 hover:text-white"
-          >
+          <a href="#" className="text-gray-500 hover:text-white">
             <svg
               className="w-5 h-5"
               fill="currentColor"
@@ -79,10 +70,7 @@ function Footer() {
               ></path>
             </svg>
           </a>
-          <a
-            href="#"
-            className="text-gray-500 hover:text-white"
-          >
+          <a href="#" className="text-gray-500 hover:text-white">
             <svg
               className="w-5 h-5"
               fill="currentColor"
@@ -96,10 +84,7 @@ function Footer() {
               ></path>
             </svg>
           </a>
-          <a
-            href="#"
-            className="text-gray-500 hover:text-white"
-          >
+          <a href="#" className="text-gray-500 hover:text-white">
             <svg
               className="w-5 h-5"
               fill="currentColor"
@@ -109,10 +94,7 @@ function Footer() {
               <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
             </svg>
           </a>
-          <a
-            href="#"
-            className="text-gray-500 hover:text-white"
-          >
+          <a href="#" className="text-gray-500 hover:text-white">
             <svg
               className="w-5 h-5"
               fill="currentColor"
@@ -127,6 +109,12 @@ function Footer() {
             </svg>
           </a>
         </div>
+        <span className="text-sm text-gray-500 sm:text-center">
+          © 2022{" "}
+          <Link href="/">
+            <a className="hover:underline">Онлайн дэлгүүр</a>
+          </Link>
+        </span>
       </div>
     </div>
   );
