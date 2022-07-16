@@ -30,7 +30,7 @@ function SideBar({ open, setOpen }: Props) {
       </div>
       <div className="flex flex-col">
         {categories.map((cat) => (
-          <SubMenu category={cat} key={cat.id} />
+          <SubMenu category={cat} key={cat.slug} />
         ))}
       </div>
     </div>

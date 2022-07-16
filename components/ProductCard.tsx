@@ -4,7 +4,7 @@ import { Product } from "../typings";
 import { brands } from "../utils/data";
 export default function ProductCard({ product }: Product | any) {
   const brand = brands.find(
-    (brand) => brand.id.toLowerCase() === product.brandId.toLocaleLowerCase()
+    (brand) => brand.slug.toLowerCase() === product.brandId.toLocaleLowerCase()
   );
   return (
     <div className="card">
@@ -18,7 +18,7 @@ export default function ProductCard({ product }: Product | any) {
             />
           </a>
         </Link>
-        <Link href={`brand/${brand?.id}`}>
+        <Link href={`brand/${brand?.slug}`}>
           <img
             src={brand?.image}
             alt={brand?.name}

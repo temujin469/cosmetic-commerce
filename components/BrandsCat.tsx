@@ -44,9 +44,9 @@ function BrandsCat() {
         }}
       >
         {brands.map((brand) => (
-          <SwiperSlide key={brand.id}>
+          <SwiperSlide key={brand.slug}>
             {
-              <Link href={`/brand/${brand.id}`}>
+              <Link href={`/brand/${brand.slug}`}>
                 <a className="flex items-center flex-col">
                   <img
                     className="w-[6rem] h-[6rem] md:w-40 md:h-40 rounded-full border object-cover hover:shadow-xl"

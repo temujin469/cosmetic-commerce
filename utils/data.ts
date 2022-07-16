@@ -1,6 +1,4 @@
 // import bcrypt from 'bcryptjs';
-
-import { bindActionCreators } from "redux";
 import { Brand, Category, Product } from "../typings";
 
 // export const  users = [
@@ -23,8 +21,8 @@ export const products: Product[] = [
     name: "Free Shirt",
     isFeatured: true,
     slug: "free-shirt",
-    catId: "Shirts",
-    subCatId: "budag",
+    catSlug: "Shirts",
+    subCatSlug: "budag",
     images: [
       "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
       "https://images.unsplash.com/photo-1617897903246-719242758050?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y29zbWV0aWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
@@ -41,10 +39,10 @@ export const products: Product[] = [
   },
   {
     name: "Fit Shirt",
-    subCatId: "budag",
+    subCatSlug: "budag",
     isFeatured: true,
     slug: "fit-shirt",
-    catId: "Shirts",
+    catSlug: "Shirts",
     images: [
       "https://images.unsplash.com/photo-1556227834-09f1de7a7d14?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29zbWV0aWMlMjBwcm9kdWN0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     ],
@@ -60,8 +58,8 @@ export const products: Product[] = [
     name: "Slim Shirt",
     isFeatured: true,
     slug: "slim-shirt",
-    catId: "shirts",
-    subCatId: "us",
+    catSlug: "shirts",
+    subCatSlug: "us",
     images: [
       "https://images.unsplash.com/photo-1600852435574-9184cc5b55ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
     ],
@@ -76,8 +74,8 @@ export const products: Product[] = [
     name: "Golf Pants",
     isFeatured: true,
     slug: "golf-pants",
-    catId: "Pants",
-    subCatId: "us",
+    catSlug: "Pants",
+    subCatSlug: "us",
     images: [
       "https://images.unsplash.com/photo-1556756483-7bf188a604e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
     ],
@@ -93,8 +91,8 @@ export const products: Product[] = [
     name: "Fit Pants",
     isFeatured: false,
     slug: "fit-pants",
-    catId: "Pants",
-    subCatId: "us",
+    catSlug: "Pants",
+    subCatSlug: "us",
 
     images: [
       "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
@@ -110,8 +108,8 @@ export const products: Product[] = [
     name: "Classic shirt",
     isFeatured: false,
     slug: "classic-shirt",
-    catId: "shirts",
-    subCatId: "us",
+    catSlug: "shirts",
+    subCatSlug: "us",
     images: [
       "https://images.unsplash.com/photo-1585232350744-974fc9804d65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGNvc21ldGljJTIwcHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
     ],
@@ -129,60 +127,60 @@ export const brands: Brand[] = [
     name: "Nike",
     image:
       "https://images.unsplash.com/photo-1602934445884-da0fa1c9d3b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGxvZ298ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    id: "nike",
+    slug: "nike",
   },
   {
     name: "Adidas",
     image:
       "https://images.unsplash.com/photo-1584441405886-bc91be61e56a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvZ298ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    id: "adidas",
+    slug: "adidas",
   },
   {
     name: "Puma",
     image:
       "https://images.unsplash.com/photo-1516876437184-593fda40c7ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGxvZ298ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    id: "puma",
+    slug: "puma",
   },
   {
     name: "Zara",
     image:
       "https://images.unsplash.com/photo-1633409361618-c73427e4e206?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8YnJhbmR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    id: "zara",
+    slug: "zara",
   },
   {
     name: "Saihan",
     image:
       "https://images.unsplash.com/photo-1612810806546-ebbf22b53496?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGJyYW5kJTIwbG9nb3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
-    id: "saihan",
+    slug: "saihan",
   },
 ];
 
 export const categories: Category[] = [
   {
     name: "Нүүр будалт",
-    id: "shirts",
+    slug: "shirts",
     image:
       "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29zbWV0aWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
     subCategories: [
       {
         name: "budag",
-        id: "budag",
+        slug: "budag",
       },
       {
         name: "shunh",
-        id: "shunh",
+        slug: "shunh",
       },
     ],
   },
   {
     name: "Үнэртэй ус",
-    id: "pants",
+    slug: "pants",
     image:
       "https://images.unsplash.com/photo-1601049676869-702ea24cfd58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29zbWV0aWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
     subCategories: [
       {
         name: "us",
-        id: "us",
+        slug: "us",
       },
     ],
   },

@@ -14,7 +14,7 @@ function SubMenu({ category }: Prop) {
   return (
     <div>
       <div className="flex items-center justify-between text-lg font-medium cursor-pointer border-l-4 hover:border-primary p-4 border-transparent">
-        <Link href={`categoryegory/${category.id}`}>
+        <Link href={`categoryegory/${category.slug}`}>
           <a>{category.name}</a>
         </Link>
         <div onClick={category.subCategories && showSubnav}>
@@ -28,7 +28,7 @@ function SubMenu({ category }: Prop) {
       <div className="flex flex-col bg-gray-100">
         {subnav &&
           category.subCategories.map((subcat) => (
-            <Link href={`#`} key={subcat.id}>
+            <Link href={`#`} key={subcat.slug}>
               <a className="px-8 py-4 text-lg">{subcat.name}</a>
             </Link>
           ))}

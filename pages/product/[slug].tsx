@@ -17,21 +17,23 @@ function ProductScreen() {
   const { slug } = query;
   const product = products.find((product) => product.slug === slug);
   const brand = brands.find(
-    (brand) => brand.id === product?.brandId.toLocaleLowerCase()
+    (brand) => brand.slug === product?.brandId.toLocaleLowerCase()
   );
-
   const { loading } = useAppSelector((state) => state.cartReducer);
 
   if (!product) {
     return <div>product not found</div>;
   }
-
   const handleQuantity = (state: string) => {
     if (state === "NEMEH" && quantity < product.countInStock) {
       setQuantity((x) => (x += 1));
     } else if (state === "HASAH" && quantity > 1) {
       setQuantity((x) => (x -= 1));
-    } else return;
+    } else if (product.countInStock === 0) {
+      toast.error(`Нөөц хүрэлцэхгүй байна`);
+    } else {
+      toast.error(`${product.countInStock}-с дээш нөөц хүрэлцэхгүй байна`);
+    }
   };
   const dispatch = useAppDispatch();
   const addToCartHandle = () => {
@@ -41,8 +43,9 @@ function ProductScreen() {
         image: product.images[0],
         price: product.price,
         name: product.name,
+        countInStock:product.countInStock,
         brand: {
-          id: brand?.id,
+          id: brand?.slug,
           name: brand?.name,
           image: brand?.image,
         },
@@ -99,7 +102,7 @@ function ProductScreen() {
         <div className="flex flex-col gap-4 sm:col-span-2">
           <ul className="space-y-1">
             <li className="flex items-center space-x-2">
-              <Link href={`../brand/${brand?.id}`}>
+              <Link href={`../brand/${brand?.slug}`}>
                 <a>
                   <img
                     className="w-10 h-10 rounded-full border-2 object-cover"
@@ -165,7 +168,9 @@ function ProductScreen() {
               >
                 <p>Сагсанд хийх</p>
               </button>
-              <button className="saaral-button font-medium flex justify-center items-center gap-2"><HeartIcon className="w-7 h-7"/> Хадгалах</button>
+              <button className="saaral-button font-medium flex justify-center items-center gap-2">
+                <HeartIcon className="w-7 h-7" /> Хадгалах
+              </button>
             </div>
           </div>
           <div>

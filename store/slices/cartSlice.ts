@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "../store";
+import { AppDispatch } from "../store";
 import { CartItem } from "../../typings";
 
 export interface CartState {
   cartItems: CartItem[];
-  cartItemsQuantity: number | 0;
+  cartItemsQuantity: number;
+  totalPrice: number
   loading: boolean;
   error: boolean;
 }
@@ -12,6 +13,7 @@ export interface CartState {
 const initialState: CartState = {
   cartItems: [],
   cartItemsQuantity: 0,
+  totalPrice: 0,
   loading: false,
   error: false,
 };
@@ -35,7 +37,14 @@ const cartSlice = createSlice({
           )
         : [newItem, ...state.cartItems];
 
-      state.cartItemsQuantity = state.cartItems.length;
+      state.cartItemsQuantity = state.cartItems.reduce(
+        (a, b) => a + b.quantity,
+        0
+      );
+      state.totalPrice = state.cartItems.reduce(
+        (a, b) => a + b.quantity * b.price,
+        0
+      );
       state.loading = false;
       state.error = false;
     },
@@ -48,8 +57,16 @@ const cartSlice = createSlice({
         (item) => item.slug !== action.payload
       );
       state.cartItems = cartItems;
-      state.cartItemsQuantity = state.cartItems.length;
-      
+
+      state.cartItemsQuantity = state.cartItems.reduce(
+        (a, b) => a + b.quantity,
+        0
+      );
+      state.totalPrice = state.cartItems.reduce(
+        (a, b) => a + b.quantity * b.price,
+        0
+      );
+
       state.loading = false;
     },
   },

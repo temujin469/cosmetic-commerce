@@ -1,8 +1,8 @@
 export type Product = {
   name: string;
   slug: string;
-  catId: string;
-  subCatId: string;
+  catSlug: string;
+  subCatSlug: string;
   images: string[];
   isFeatured: boolean;
   price: number;
@@ -18,6 +18,7 @@ export type CartItem = {
   image: string;
   price: number;
   name: string;
+  countInStock:number;
   quantity: number | 0;
   brand: {
     id?: string;
@@ -28,13 +29,13 @@ export type CartItem = {
 
 export interface Brand {
   name: string;
-  id: string;
+  slug: string;
   image: string;
 }
 
 export interface Category {
   name: string;
   image: string;
-  id: string;
-  subCategories: { name: string; id: string }[];
+  slug: string;
+  subCategories: { name: string; slug: string }[];
 }

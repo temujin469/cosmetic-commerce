@@ -8,10 +8,10 @@ import { brands, products } from "../../utils/data";
 
 function brandScreen() {
   const { query } = useRouter();
-  const { brandId } = query;
-  const brand = brands.find((brand) => brand.id === brandId);
+  const { slug } = query;
+  const brand = brands.find((brand) => brand.slug === slug);
   const brandProducts: Product[] = products.filter(
-    (product) => product.brandId.toLowerCase() === brand?.id
+    (product) => product.brandId.toLowerCase() === brand?.slug
   );
   return (
     <Layout title={brand?.name}>
