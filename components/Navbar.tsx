@@ -5,11 +5,11 @@ import {
   ShoppingBagIcon,
   UserIcon,
 } from "@heroicons/react/outline";
-import classNames from "classnames";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useAppSelector } from "../store/store";
 import NavLink from "./NavLink";
+import SearchInput from "./SearchInput";
 import SideBar from "./SideBar";
 
 const Navbar = () => {
@@ -30,18 +30,14 @@ const Navbar = () => {
       <div
         className={`fixed w-full z-20 drop-shadow flex h-16 md:h-20 px-5 justify-between items-center bg-white select-none`}
       >
-        <button className="md:hidden" onClick={()=>setOpen(!open)}>
-          <MenuIcon className="w-8 h-8"/>
+        <button className="md:hidden" onClick={() => setOpen(!open)}>
+          <MenuIcon className="w-8 h-8" />
         </button>
         <Link href="/">
           <a className="font-bold text-lg">Нүүр хуудас</a>
         </Link>
-        <div className="bg-gray-100 rounded-md items-center px-4 py-3 hidden md:flex md:w-[300px] lg:w-[450px]">
-          <input
-            placeholder="Та юу хайж байна вэ?"
-            className="outline-none bg-transparent w-full"
-          />
-          <SearchIcon className="w-7 h-7 cursor-pointer text-gray-600" />
+        <div className="hidden sm:inline-block sm:w-[280px] md:w-[310px] lg:w-[450px]">
+          <SearchInput />
         </div>
         <div className="flex space-x-2 md:space-x-6 items-center">
           <Link href="#">
@@ -64,8 +60,8 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <div >
-        <SideBar open={open} setOpen={setOpen}/>
+      <div>
+        <SideBar open={open} setOpen={setOpen} />
       </div>
     </nav>
   );

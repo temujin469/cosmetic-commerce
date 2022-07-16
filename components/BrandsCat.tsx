@@ -9,7 +9,7 @@ import Link from "next/link";
 function BrandsCat() {
   return (
     <div className="px-5 pb-5 sm:pb-10 pt-0 bg-white">
-      <h1 className="md:text-2xl text-xl font-medium text-gray-800 py-5">Брандууд</h1>
+      <h1 className="md:text-2xl text-xl font-medium text-gray-800 py-5">Брэндүүд</h1>
       <Swiper
         modules={[A11y]}
         breakpoints={{
@@ -46,7 +46,7 @@ function BrandsCat() {
         {brands.map((brand) => (
           <SwiperSlide key={brand.id}>
             {
-              <Link href={`brand/${brand.id}`}>
+              <Link href={`/brand/${brand.id}`}>
                 <a className="flex items-center flex-col">
                   <img
                     className="w-[6rem] h-[6rem] md:w-40 md:h-40 rounded-full border object-cover hover:shadow-xl"
