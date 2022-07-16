@@ -1,9 +1,8 @@
 import {
   HeartIcon,
-  MenuAlt1Icon,
   MenuIcon,
   SearchIcon,
-  ShoppingCartIcon,
+  ShoppingBagIcon,
   UserIcon,
 } from "@heroicons/react/outline";
 import classNames from "classnames";
@@ -32,7 +31,7 @@ const Navbar = () => {
         className={`fixed w-full z-20 drop-shadow flex h-16 md:h-20 px-5 justify-between items-center bg-white select-none`}
       >
         <button className="md:hidden" onClick={()=>setOpen(!open)}>
-          {open ? <MenuAlt1Icon className="w-8 h-8" /> : <MenuIcon className="w-8 h-8" />}
+          <MenuIcon className="w-8 h-8"/>
         </button>
         <Link href="/">
           <a className="font-bold text-lg">Нүүр хуудас</a>
@@ -52,8 +51,8 @@ const Navbar = () => {
           </Link>
           <Link href="/cart">
             <a className="relative">
-              <NavLink Icon={ShoppingCartIcon} name="Сагс" />
-              <span className="absolute translate-x-[50%] right-[50%] top-[-10px] text-primary">
+              <NavLink Icon={ShoppingBagIcon} name="Сагс" />
+              <span className="absolute right-[5px] top-[-5px] text-primary">
                 {cartItemsQuantity}
               </span>
             </a>

@@ -16,7 +16,7 @@ const Layout: FC<Props> = ({ title, children }) => {
         <title>{title ? title : "online-shop"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="max-h-screen flex flex-col justify-between bg-gray-100 overflow-y-scroll">
+      <div className="min-h-screen max-h-screen flex flex-col justify-between bg-gray-100 overflow-y-scroll">
         <header>
           <Navbar />
         </header>

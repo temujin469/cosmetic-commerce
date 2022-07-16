@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .card {
-  @apply block rounded-md shadow overflow-hidden max-w-[300px] hover:shadow-xl;
+  @apply block rounded-md border overflow-hidden max-w-[300px] hover:shadow-xl;
 }
 
 .primary-button {

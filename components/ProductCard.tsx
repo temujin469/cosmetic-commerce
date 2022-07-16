@@ -14,7 +14,7 @@ export default function ProductCard({ product }: Product | any) {
             <img
               src={product.images[0]}
               alt={product.name}
-              className="shadow h-40 w-full object-cover"
+              className="shadow h-[140px] md:h-[180px] lg:h-[270px] w-full object-cover"
             />
           </a>
         </Link>

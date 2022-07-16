@@ -3,59 +3,8 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="px-5 py-7 bg-gray-600 sm:p-6 dark:bg-gray-600 space-y-5">
-      <div className="md:flex md:justify-between">
-        <div className="mb-6 md:mb-0  md:inline-block  hidden">
-          <a href="#" className="flex items-center">
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="mr-3 h-8"
-              alt="FlowBite Logo"
-            />
-            <span className="self-centertext-2xl font-semibold whitespace-nowrap text-primary">
-              Онлайн дэлгүүр
-            </span>
-          </a>
-        </div>
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-primary">
-              Холбоосууд
-            </h2>
-            <ul className="text-gray-300">
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  мэдээлэл
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Бидний тухай
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-primary">
-              Холбоо барих
-            </h2>
-            <ul className="text-gray-300">
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  99607953
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  temvjin469@gmail
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col md:flex-row items-center justify-between gap-5">
-        <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+      <div className="flex justify-center sm:justify-between sm:px-10 items-center gap-3 p-5 flex-col sm:flex-row bg-gray-200">
+        <div className="flex space-x-6">
           <a href="#" className="text-gray-500 hover:text-white">
             <svg
               className="w-5 h-5"
@@ -116,7 +65,6 @@ function Footer() {
           </Link>
         </span>
       </div>
-    </div>
   );
 }
 

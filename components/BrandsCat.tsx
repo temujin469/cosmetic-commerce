@@ -3,13 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { A11y } from "swiper";
 
-import { categories } from "../utils/data";
+import { brands} from "../utils/data";
 import Link from "next/link";
 
-function Categories() {
+function BrandsCat() {
   return (
-    <div className="px-5 pb-2 sm:pb-10 pt-0 bg-white">
-      <h1 className="md:text-2xl text-xl font-medium text-gray-800 py-5">Ангилалууд</h1>
+    <div className="px-5 pb-5 sm:pb-10 pt-0 bg-white">
+      <h1 className="md:text-2xl text-xl font-medium text-gray-800 py-5">Брандууд</h1>
       <Swiper
         modules={[A11y]}
         breakpoints={{
@@ -43,17 +43,17 @@ function Categories() {
           },
         }}
       >
-        {categories.map((cat) => (
-          <SwiperSlide key={cat.id}>
+        {brands.map((brand) => (
+          <SwiperSlide key={brand.id}>
             {
-              <Link href={`#`}>
+              <Link href={`brand/${brand.id}`}>
                 <a className="flex items-center flex-col">
                   <img
-                    className="w-[6rem] h-[6rem] md:w-40 md:h-40 rounded-full object-cover"
-                    src={cat.image}
-                    alt={cat.name}
+                    className="w-[6rem] h-[6rem] md:w-40 md:h-40 rounded-full border object-cover hover:shadow-xl"
+                    src={brand.image}
+                    alt={brand.name}
                   />
-                  <p className="font-medium text-gray-700 md:text-xl">{cat.name}</p>
+                  <p className="font-medium text-gray-700 md:text-xl">{brand.name}</p>
                 </a>
               </Link>
             }
@@ -64,4 +64,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default BrandsCat;

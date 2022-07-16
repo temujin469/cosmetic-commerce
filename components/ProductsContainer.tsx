@@ -39,16 +39,6 @@ function ProductsContainer({ products }: Props) {
           slidesPerView: 4,
           spaceBetween: 20,
         },
-        900: {
-          // width: 900,
-          slidesPerView: 5,
-          spaceBetween: 20,
-        },
-        1070: {
-          // width: 1070,
-          slidesPerView: 6,
-          spaceBetween: 20,
-        },
       }}
     >
       {products.map((product) => (

@@ -1,5 +1,5 @@
 import Banner from '../components/Banner'
-import Categories from '../components/Categories'
+import Categories from '../components/BrandsCat'
 import Layout from '../components/Layout'
 import ProductWrapper from '../components/ProductWrapper'
 

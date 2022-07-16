@@ -8,7 +8,7 @@ import Link from "next/link";
 import { addToCart } from "../../store/slices/cartSlice";
 import { CartItem } from "../../typings";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { MinusIcon, PlusIcon } from "@heroicons/react/outline";
+import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/outline";
 import toast from "react-hot-toast";
 import Collapse from "../../components/Collapse";
 function ProductScreen() {
@@ -99,7 +99,7 @@ function ProductScreen() {
         <div className="flex flex-col gap-4 sm:col-span-2">
           <ul className="space-y-1">
             <li className="flex items-center space-x-2">
-              <Link href={`brand/${brand?.id}`}>
+              <Link href={`../brand/${brand?.id}`}>
                 <a>
                   <img
                     className="w-10 h-10 rounded-full border-2 object-cover"
@@ -165,7 +165,7 @@ function ProductScreen() {
               >
                 <p>Сагсанд хийх</p>
               </button>
-              <button className="saaral-button flex-1">Хадгалах</button>
+              <button className="saaral-button font-medium flex justify-center items-center gap-2"><HeartIcon className="w-7 h-7"/> Хадгалах</button>
             </div>
           </div>
           <div>

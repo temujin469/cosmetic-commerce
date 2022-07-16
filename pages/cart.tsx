@@ -25,16 +25,18 @@ function cart() {
             <div className="">
               <Image src="/images/empty.png" width={500} height={500} />
             </div>
-            <div className="flex items-center flex-col gap-3">
+            <div className="flex flex-col gap-3 w-full text-center">
               <p>Таны сагс хоосон байна</p>
               <Link href="/">
-                <button className="primary-button w-full">Нүүр хуудас</button>
+                <a>
+                  <button className="primary-button w-full">Нүүр хуудас</button>
+                </a>
               </Link>{" "}
             </div>
           </div>
         ) : (
           <div className="grid md:grid-cols-5 gap-5">
-            <div className="md:col-span-3 bg-white rounded-md p-5 shadow h-fit">
+            <div className="md:col-span-3 bg-white rounded-md p-5 border h-fit">
               <h1 className="text-xl font-md text-gray-800 mb-5">
                 Барааны жагсаалт
               </h1>
@@ -91,7 +93,7 @@ function cart() {
                 ))}
               </div>
             </div>
-            <div className="md:col-span-2 bg-white rounded-md p-5 shadow">
+            <div className="md:col-span-2 bg-white rounded-md p-5 border">
               <h1 className="text-xl font-md text-gray-800 mb-5">
                 Сагсны мэдээлэл
               </h1>
@@ -101,14 +103,14 @@ function cart() {
                     className="rounded-l outline-none w-full px-2"
                     placeholder="Промо код оруулах"
                   />
-                  <button className="rounded-r bg-gray-200 h-full px-2">Ашиглах</button>
+                  <button className="rounded-r bg-gray-200 h-full px-2">
+                    Ашиглах
+                  </button>
                 </div>
                 <div className="flex justify-between items-center">
                   <div>
                     <h2>Хүргэлт</h2>
-                    <p className="pr-3">
-                      100,000₮-с дээш хүргэлт үнэгүй
-                    </p>
+                    <p className="pr-3">100,000₮-с дээш хүргэлт үнэгүй</p>
                   </div>
                   <p className="text-xl text-gray-900">4000</p>
                 </div>
