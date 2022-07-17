@@ -1,6 +1,6 @@
 import { MinusIcon, PlusIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addToCart, removeCartItem } from "../store/slices/cartSlice";
 import { useAppDispatch } from "../store/store";
@@ -15,23 +15,22 @@ function CartItem({ cartItem }: Prop) {
   const dispatch = useAppDispatch();
 
   const updateCartItemQuantity = () => {
-    const newCartItem = {...cartItem,quantity}
+    const newCartItem = { ...cartItem, quantity };
     addToCart(dispatch, newCartItem);
   };
 
+  useEffect(() => {
+    updateCartItemQuantity();
+  }, [quantity]);
 
   const handleQuantity = (state: string) => {
-    if (state === "NEMEH" && quantity <= cartItem.countInStock) {
+    if (state === "NEMEH" && quantity < cartItem.countInStock) {
       setQuantity((x) => (x += 1));
-      updateCartItemQuantity();
     } else if (state === "HASAH" && quantity > 1) {
       setQuantity((x) => (x -= 1));
-      updateCartItemQuantity();
-    } else if (cartItem.countInStock === 0) {
+    } else if (quantity === cartItem.countInStock) {
       toast.error(`Нөөц хүрэлцэхгүй байна`);
-    } else {
-      toast.error(`${cartItem.countInStock}-с дээш нөөц хүрэлцэхгүй байна`);
-    }
+    } else return;
   };
 
   const removeCartItemHandler = (slug: string) => {

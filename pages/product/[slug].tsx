@@ -31,9 +31,9 @@ function ProductScreen() {
       setQuantity((x) => (x -= 1));
     } else if (product.countInStock === 0) {
       toast.error(`Нөөц хүрэлцэхгүй байна`);
-    } else {
+    } else if (quantity === product.countInStock) {
       toast.error(`${product.countInStock}-с дээш нөөц хүрэлцэхгүй байна`);
-    }
+    }else return
   };
   const dispatch = useAppDispatch();
   const addToCartHandle = () => {

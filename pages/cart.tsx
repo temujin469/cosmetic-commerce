@@ -1,19 +1,29 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../components/Layout";
 import { useAppSelector } from "../store/store";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import CartItem from "../components/CartItem";
+import dynamic from "next/dynamic";
 
-function cart() {
-  const [quantity, setQuantity] = useState<number>(1);
-  const { cartItems, cartItemsQuantity, totalPrice } = useAppSelector(
+function Cart() {
+  const { cartItems} = useAppSelector(
     (state) => state.cartReducer
   );
   const router = useRouter();
   
+  const totalPrice:number = cartItems.reduce(
+    (a, b) => a + b.quantity * b.price,
+    0
+  );
+
   const totalCost:number = totalPrice + 0
+
+  const cartItemsQuantity:number = cartItems.reduce((a,b)=>a + b.quantity ,0 );
+
+  
+
   const sumbitOrder = () => {
     router.push("/shipping");
   };
@@ -21,7 +31,7 @@ function cart() {
   return (
     <Layout title="Таний сагс">
       <div className="mt-0 p-5">
-        {cartItemsQuantity === 0 ? (
+        {cartItems.length === 0 ? (
           <div className="flex flex-col items-center">
             <div className="">
               <Image src="/images/empty.png" width={500} height={500} />
@@ -91,4 +101,4 @@ function cart() {
   );
 }
 
-export default cart;
+export default dynamic(()=>Promise.resolve(Cart),{ssr:false});

@@ -6,7 +6,7 @@ import {
   UserIcon,
 } from "@heroicons/react/outline";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../store/store";
 import NavLink from "./NavLink";
 import SearchInput from "./SearchInput";
@@ -14,16 +14,14 @@ import SideBar from "./SideBar";
 
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { cartItemsQuantity } = useAppSelector((state) => state.cartReducer);
-  // const [fixed, setFixed] = useState<boolean>(false);
+  const { cartItems } = useAppSelector(
+    (state) => state.cartReducer
+  );
+  const [cartItemsQuant, setCartItemQuant] = useState<number>(0);
 
-  // globalThis.onscroll = () => {
-  //   if (window.scrollY > 230 || window.scrollY === 0) {
-  //     return setFixed(false);
-  //   } else {
-  //     return setFixed(true);
-  //   }
-  // };
+  useEffect(() => {
+    setCartItemQuant(cartItems.reduce((a, b) => a + b.quantity, 0));
+  }, [cartItems]);
 
   return (
     <nav>
@@ -48,9 +46,11 @@ const Navbar = () => {
           <Link href="/cart">
             <a className="relative">
               <NavLink Icon={ShoppingBagIcon} name="Сагс" />
-              <span className="absolute right-[5px] top-[-5px] text-primary">
-                {cartItemsQuantity}
-              </span>
+              {cartItemsQuant !== 0 && (
+                <span className="absolute right-[5px] top-[-5px] text-primary">
+                  {cartItemsQuant}
+                </span>
+              )}
             </a>
           </Link>
           <Link href="#">

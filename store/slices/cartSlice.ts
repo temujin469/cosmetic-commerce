@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../store";
 import { CartItem } from "../../typings";
+import Cookies from "js-cookie";
+
+const savedCartItems = Cookies.get("cart");
 
 export interface CartState {
   cartItems: CartItem[];
-  cartItemsQuantity: number;
-  totalPrice: number
   loading: boolean;
   error: boolean;
 }
 
 const initialState: CartState = {
-  cartItems: [],
-  cartItemsQuantity: 0,
-  totalPrice: 0,
+  cartItems: savedCartItems ? JSON.parse(savedCartItems) : [],
   loading: false,
   error: false,
 };
@@ -22,33 +21,27 @@ const cartSlice = createSlice({
   name: "Cart",
   initialState,
   reducers: {
-    addToCartStart: (state) => {
+    saveToCartStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    addToCartSuccess: (state, action: PayloadAction<CartItem>) => {
+    saveToCartSuccess: (state, action: PayloadAction<CartItem>) => {
       const newItem = action.payload;
       const existItem = state.cartItems.find(
         (item) => item.slug === newItem.slug
       );
       state.cartItems = existItem
         ? state.cartItems.map((item) =>
-            item.name === existItem.name ? newItem : item
+            item.slug === existItem.slug ? newItem : item
           )
         : [newItem, ...state.cartItems];
 
-      state.cartItemsQuantity = state.cartItems.reduce(
-        (a, b) => a + b.quantity,
-        0
-      );
-      state.totalPrice = state.cartItems.reduce(
-        (a, b) => a + b.quantity * b.price,
-        0
-      );
+      Cookies.set("cart", JSON.stringify(state.cartItems));
+
       state.loading = false;
       state.error = false;
     },
-    addToCartFailure: (state) => {
+    saveToCartFailure: (state) => {
       state.error = true;
     },
     removeCart: (state, action: PayloadAction<string>) => {
@@ -57,30 +50,22 @@ const cartSlice = createSlice({
         (item) => item.slug !== action.payload
       );
       state.cartItems = cartItems;
-
-      state.cartItemsQuantity = state.cartItems.reduce(
-        (a, b) => a + b.quantity,
-        0
-      );
-      state.totalPrice = state.cartItems.reduce(
-        (a, b) => a + b.quantity * b.price,
-        0
-      );
+      Cookies.set("cart", JSON.stringify(cartItems));
 
       state.loading = false;
     },
   },
 });
 
-const { addToCartStart, addToCartSuccess, addToCartFailure, removeCart } =
+const { saveToCartStart, saveToCartSuccess, saveToCartFailure, removeCart } =
   cartSlice.actions;
 
 export const addToCart = (dispatch: AppDispatch, cartItem: CartItem) => {
   if (!cartItem) {
-    dispatch(addToCartFailure());
+    dispatch(saveToCartFailure());
   } else {
-    dispatch(addToCartStart());
-    dispatch(addToCartSuccess(cartItem));
+    dispatch(saveToCartStart());
+    dispatch(saveToCartSuccess(cartItem));
   }
 };
 

@@ -19,7 +19,7 @@ export type CartItem = {
   price: number;
   name: string;
   countInStock:number;
-  quantity: number | 0;
+  quantity: number
   brand: {
     id?: string;
     name?: string;
