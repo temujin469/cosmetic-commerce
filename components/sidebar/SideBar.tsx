@@ -1,12 +1,11 @@
 import {
-  ChevronDownIcon,
-  ChevronUpIcon,
   XIcon,
 } from "@heroicons/react/outline";
 import classNames from "classnames";
-import Link from "next/link";
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { categories } from "../utils/data";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { getCategories } from "../../api/category";
+import { Category } from "../../typings";
+// import { categories } from "../utils/data";
 import SubMenu from "./SubMenu";
 
 interface Props {
@@ -15,6 +14,18 @@ interface Props {
 }
 
 function SideBar({ open, setOpen }: Props) {
+
+  const [categories,setCategories] = useState<Category[]>([]);
+
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      const categories:Category[] = await getCategories()
+      setCategories(categories);
+    }
+
+    fetchData()
+  },[])
   return (
     <div
       className={classNames(
@@ -29,8 +40,8 @@ function SideBar({ open, setOpen }: Props) {
         </button>
       </div>
       <div className="flex flex-col">
-        {categories.map((cat) => (
-          <SubMenu category={cat} key={cat.slug} />
+        {categories.map((category) => (
+          <SubMenu  category={category} key={category.slug} />
         ))}
       </div>
     </div>

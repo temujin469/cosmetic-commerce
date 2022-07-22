@@ -1,41 +1,69 @@
 export type Product = {
   name: string;
   slug: string;
-  catSlug: string;
-  subCatSlug: string;
-  images: string[];
+  subCategory:{
+    slug:string
+    name:string
+  };
+  category:{
+    slug:string
+    name:string
+  }
+  images:{}[];
+  thumbnail:{}
   isFeatured: boolean;
-  price: number;
-  brandId: string;
-  rating: number;
-  numReviews: number;
-  countInStock: number;
-  description: string;
+  tags:string[]
+  brand:{
+    slug:string
+    name:string
+    logo:{}
+  };
+  description:{}[];
+  options:Option[];
+  defaultOption:Option;
 };
+
+export type Option = {
+  countInStock:number
+  name:string
+  price:number
+}
+
+// export type ProductType = "cosmetic" | "products"
+// export type BrandType = "cosmeticBrands" | "brands"
+// export type categoryType = "cosmeticCategories" | "categories"
 
 export type CartItem = {
   slug: string;
   image: string;
   price: number;
-  name: string;
+  productName: string;
+  optionName: string;
   countInStock:number;
   quantity: number
-  brand: {
-    id?: string;
-    name?: string;
-    image?: string;
-  };
+  // brand:Brand;
 };
 
-export interface Brand {
+export type Brand = {
+  backgroundImage:{}
+  logo:{}
   name: string;
   slug: string;
-  image: string;
 }
 
-export interface Category {
+export type Category = {
   name: string;
-  image: string;
   slug: string;
-  subCategories: { name: string; slug: string }[];
+  subCategories: SubCategory[];
+}
+
+export type SubCategory = {
+  name: string;
+  slug: string 
+}
+
+export type Advertising = {
+  _id:string
+  image:{}
+  name:string
 }

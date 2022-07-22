@@ -1,16 +1,15 @@
 import {
   HeartIcon,
   MenuIcon,
-  SearchIcon,
   ShoppingBagIcon,
   UserIcon,
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../store/store";
+import { useAppSelector } from "../../store/store";
 import NavLink from "./NavLink";
-import SearchInput from "./SearchInput";
-import SideBar from "./SideBar";
+import SearchInput from "../SearchInput";
+import SideBar from "../sidebar/SideBar";
 
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);

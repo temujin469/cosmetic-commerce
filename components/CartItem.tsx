@@ -47,13 +47,7 @@ function CartItem({ cartItem }: Prop) {
       </Link>
       <div className="flex flex-col justify-between flex-1">
         <div className="flex justify-between items-center">
-          <Link href={`brand/${cartItem.brand.id}`}>
-            <img
-              className="w-7 h-7 rounded-full border-2 object-cover"
-              src={cartItem.brand.image}
-              alt={cartItem.brand.name}
-            />
-          </Link>
+          <p className="text-xl text-gray-800 m-0">{cartItem.optionName}</p>
           <button
             onClick={() => removeCartItemHandler(cartItem.slug)}
             className="jijig-saaral-button"
@@ -62,7 +56,8 @@ function CartItem({ cartItem }: Prop) {
           </button>
         </div>
         <div className="flex justify-start items-center">
-          <p className="text-xl text-gray-800">{cartItem.name}</p>
+          <p className="text-xl text-gray-800 sm:hidden m-0">{cartItem.productName.length > 18 ? cartItem.productName.slice(0,18)+"...": cartItem.productName}</p>
+          <p className="text-xl text-gray-800 hidden sm:inline-block m-0">{cartItem.productName}</p>
         </div>
         <div className="flex justify-between items-center">
           <p className="text-xl text-gray-800">{cartItem.price}₮</p>

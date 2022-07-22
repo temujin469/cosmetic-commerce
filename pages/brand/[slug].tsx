@@ -1,20 +1,23 @@
+import { GetServerSideProps } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
 import React from "react";
+import { getBrandBySlug } from "../../api/brand";
+import { getProductsByBrand } from "../../api/product";
 import Layout from "../../components/Layout";
-import ProductsContainer from "../../components/ProductsContainer";
-import { Product } from "../../typings";
-import { brands, products } from "../../utils/data";
+import ProductsContainer from "../../components/ProductsSliderContainer";
+import { Brand, Product } from "../../typings";
+import { urlFor } from "../../utils/imageOptimize";
 
-function brandScreen() {
-  const { query } = useRouter();
-  const { slug } = query;
-  const brand = brands.find((brand) => brand.slug === slug);
-  const brandProducts: Product[] = products.filter(
-    (product) => product.brandId.toLowerCase() === brand?.slug
-  );
+type Props = {
+  products:Product[]
+  brand:Brand
+}
+
+function brandScreen({products,brand}:Props) {
+
   return (
-    <Layout title={brand?.name}>
+    <Layout title={brand.name}>
       <div className="p-4 relative">
         <Image
           className="object-cover overflow-hidden"
@@ -25,18 +28,18 @@ function brandScreen() {
         />
         <div className="left-5 bottom-5 text-white text-lg md:text-2xl md:left-8 md:bottom-8 absolute bg-black/20 flex items-center space-x-4 p-2 md:p-3 rounded">
           <img
-            src={brand?.image}
+            src={urlFor(brand.logo).width(200).height(200).url()}
             className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover"
           />
-          <p>{brand?.name}</p>
+          <p className="m-0">{brand.name}</p>
         </div>
       </div>
       <div className="bg-white">
         <div className="flex items-center justify-between px-4">
-          <h1 className="md:text-2xl font-semibold text-gray-800 py-4 space-x-2">
-            <p className="hidden md:inline-block">Нийт барааны тоо</p>
-            <p className="md:hidden inline-block">Нийт Бараа</p>
-            <span className="text-primary">{brandProducts.length}</span>
+          <h1 className="md:text-2xl font-semibold text-gray-800 py-4 space-x-2 m-0">
+            <p className="hidden md:inline-block m-0">Нийт барааны тоо</p>
+            <p className="md:hidden inline-block m-0">Нийт Бараа</p>
+            <span className="text-primary">{products.length}</span>
           </h1>
           <select
             name="cars"
@@ -51,7 +54,7 @@ function brandScreen() {
         </div>
         <hr />
         <div className="p-5 min-h-screen">
-          <ProductsContainer products={brandProducts} />
+          <ProductsContainer products={products} />
         </div>
       </div>
     </Layout>
@@ -59,3 +62,21 @@ function brandScreen() {
 }
 
 export default brandScreen;
+
+interface IParams extends ParsedUrlQuery {
+  slug: string
+}
+
+
+export const getServerSideProps:GetServerSideProps = async (context) => {
+  const {slug } = context.params as IParams;
+  const brand:Brand = await getBrandBySlug(slug)
+  const products:Product[] = await getProductsByBrand(slug)
+
+  return {
+    props:{
+      brand,
+      products
+    }
+  }
+}

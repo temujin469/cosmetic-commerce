@@ -1,7 +1,7 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import React, { useState } from "react";
-import { Category } from "../typings";
+import { Category } from "../../typings";
 
 type Prop = {
   category: Category;

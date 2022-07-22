@@ -2,11 +2,15 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { A11y } from "swiper";
-
-import { brands} from "../utils/data";
 import Link from "next/link";
+import { Brand } from "../typings";
+import { urlFor } from "../utils/imageOptimize";
 
-function BrandsCat() {
+type Props = {
+  brands:Brand[]
+}
+
+function BrandsCat({brands}:Props) {
   return (
     <div className="px-5 pb-5 sm:pb-10 pt-0 bg-white">
       <h1 className="md:text-2xl text-xl font-medium text-gray-800 py-5">Брэндүүд</h1>
@@ -50,10 +54,10 @@ function BrandsCat() {
                 <a className="flex items-center flex-col">
                   <img
                     className="w-[6rem] h-[6rem] md:w-40 md:h-40 rounded-full border object-cover hover:shadow-xl"
-                    src={brand.image}
+                    src={urlFor(brand.logo).height(200).width(200).url()}
                     alt={brand.name}
                   />
-                  <p className="font-medium text-gray-700 md:text-xl">{brand.name}</p>
+                  <p className="font-medium text-base text-gray-700 md:text-xl">{brand.name}</p>
                 </a>
               </Link>
             }

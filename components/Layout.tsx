@@ -2,7 +2,7 @@ import Head from "next/head";
 import React, { FC } from "react";
 import { Toaster } from "react-hot-toast";
 import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 
 interface Props {
   title?: string | string[];

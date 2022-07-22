@@ -41,8 +41,8 @@ function ProductsContainer({ products }: Props) {
         },
       }}
     >
-      {products.map((product) => (
-        <SwiperSlide>
+      {products?.map((product) => (
+        <SwiperSlide key={product.slug}>
           <div className="pb-8">
             <ProductCard product={product} key={product.slug} />
           </div>

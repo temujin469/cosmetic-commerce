@@ -1,57 +1,58 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { brands, products } from "../../utils/data";
-import classNames from "classnames";
 import Layout from "../../components/Layout";
 import Link from "next/link";
-// import Image from "next/image";
 import { addToCart } from "../../store/slices/cartSlice";
-import { CartItem } from "../../typings";
-import { useAppDispatch, useAppSelector } from "../../store/store";
+import { CartItem, Option, Product } from "../../typings";
+import { useAppDispatch } from "../../store/store";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/outline";
 import toast from "react-hot-toast";
 import Collapse from "../../components/Collapse";
-function ProductScreen() {
+import { GetServerSideProps } from "next";
+import { ParsedUrlQuery } from "querystring";
+import { getProductBySlug } from "../../api/product";
+import { urlFor } from "../../utils/imageOptimize";
+import ProductImageSlider from "../../components/productImageSlider";
+import dynamic from "next/dynamic";
+
+type Props = {
+  product: Product;
+};
+
+function ProductScreen({ product }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
-  const { query } = useRouter();
-  const { slug } = query;
-  const product = products.find((product) => product.slug === slug);
-  const brand = brands.find(
-    (brand) => brand.slug === product?.brandId.toLocaleLowerCase()
-  );
-  const { loading } = useAppSelector((state) => state.cartReducer);
+  const [option, setOption] = useState<Option>(product.defaultOption);
+  const allOptions = [product.defaultOption, ...product.options];
 
   if (!product) {
-    return <div>product not found</div>;
+    return <div>fending</div>;
   }
   const handleQuantity = (state: string) => {
-    if (state === "NEMEH" && quantity < product.countInStock) {
+    if (state === "NEMEH" && quantity < option.countInStock) {
       setQuantity((x) => (x += 1));
     } else if (state === "HASAH" && quantity > 1) {
       setQuantity((x) => (x -= 1));
-    } else if (product.countInStock === 0) {
+    } else if (option.countInStock === 0) {
       toast.error(`Нөөц хүрэлцэхгүй байна`);
-    } else if (quantity === product.countInStock) {
-      toast.error(`${product.countInStock}-с дээш нөөц хүрэлцэхгүй байна`);
-    }else return
+    } else if (quantity === option.countInStock) {
+      toast.error(`${option.countInStock}-с дээш нөөц хүрэлцэхгүй байна`);
+    } else return;
   };
   const dispatch = useAppDispatch();
+
   const addToCartHandle = () => {
-    if (product.countInStock != 0) {
+    if (option.countInStock != 0) {
       const cartItem: CartItem = {
         slug: product.slug,
-        image: product.images[0],
-        price: product.price,
-        name: product.name,
-        countInStock:product.countInStock,
-        brand: {
-          id: brand?.slug,
-          name: brand?.name,
-          image: brand?.image,
-        },
+        image: urlFor(product.thumbnail).width(200).height(200).url(),
+        productName: product.name,
+        price: option.price,
+        optionName: option.name,
+        countInStock: option.countInStock,
         quantity,
       };
+
       addToCart(dispatch, cartItem);
+
       return toast.success("Сагсанд амжилттай нэмэгдлээ", {
         style: {
           border: "1px solid green",
@@ -69,6 +70,7 @@ function ProductScreen() {
       });
     }
   };
+
   return (
     <Layout title={product.name}>
       <div className="p-2">
@@ -76,42 +78,36 @@ function ProductScreen() {
       </div>
       <div className="grid sm:grid-cols-4 gap-5 md:gap-10 lg:gap-20 bg-white p-4">
         <div className="sm:col-span-2 h-fit">
-          {/* <Image
-            src={product.image}
-            alt={product.name}
-            width={640}
-            height={640}
-            layout="responsive"
-          /> */}
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            className="max-w-[500px] w-full max-h-80 sm:max-h-[320px] md:max-h-96 lg:max-h-[550px] overflow-hidden border lg:border-2 rounded-md sm:p-2 lg:p-5 object-cover"
-          />
-          <div className="flex items-center gap-2 md:gap-4">
-            {product.images.map((image, i) => (
-              <img
-                src={image}
-                key={i}
-                alt="product-images"
-                className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mt-2 md:mt-4 border rounded-md object-cover"
-              />
+          <div className="grid grid-cols-1 rounded-md overflow-hidden">
+            <ProductImageSlider images={product.images} />
+          </div>
+          <div className="flex items-center gap-2 md:gap-4 pt-2">
+            {allOptions.map((option, i) => (
+              <button
+                className="saaral-button"
+                onClick={() => setOption(option)}
+              >
+                {option.name}
+              </button>
             ))}
           </div>
         </div>
         <div className="flex flex-col gap-4 sm:col-span-2">
           <ul className="space-y-1">
             <li className="flex items-center space-x-2">
-              <Link href={`../brand/${brand?.slug}`}>
+              <Link href={`../brand/${product.brand.slug}`}>
                 <a>
                   <img
                     className="w-10 h-10 rounded-full border-2 object-cover"
-                    src={brand?.image}
-                    alt={brand?.name}
+                    src={urlFor(product.brand.logo)
+                      .width(200)
+                      .height(200)
+                      .url()}
+                    alt={product.brand.name}
                   />
                 </a>
               </Link>
-              <h1 className="text-lg md:text-xl">{brand?.name}</h1>
+              <h1 className="text-lg md:text-xl m-0">{product.brand.name}</h1>
             </li>
             <li>
               <h1 className="md:text-2xl text-xl font-medium text-gray-800">
@@ -119,20 +115,9 @@ function ProductScreen() {
               </h1>
             </li>
             <li>
-              <h1 className="md:text-2xl text-xl font-medium text-gray-800">
-                ₮{product.price}
+              <h1 className="md:text-2xl text-xl font-medium text-primary">
+                ₮{option.price}
               </h1>
-            </li>
-            <li>
-              {product.countInStock ? (
-                <h1 className="md:text-2xl text-xl font-medium text-gray-800">
-                  {product.countInStock} Ширхэг үлдсэн
-                </h1>
-              ) : (
-                <h1 className="md:text-2xl text-lg font-medium text-red-500">
-                  Бүтээгдэхүүн дууссан
-                </h1>
-              )}
             </li>
           </ul>
           <div className="space-y-4 border-y py-4">
@@ -160,21 +145,23 @@ function ProductScreen() {
             </div>
             <div className="gap-4 flex flex-col md:flex-row">
               <button
-                disabled={loading}
-                className={classNames("primary-button flex-1", {
-                  "cursor-progress": loading,
-                })}
+                disabled={option.countInStock === 0}
+                className="primary-button flex-1 disabled:bg-primary/70"
                 onClick={addToCartHandle}
               >
-                <p>Сагсанд хийх</p>
+                <p className="m-0">
+                  {option.countInStock === 0
+                    ? "бүтээгдэхүүн дууссан"
+                    : "Сагсанд хийх"}
+                </p>
               </button>
-              <button className="saaral-button font-medium flex justify-center items-center gap-2">
+              <button className="saaral-button font-medium flex justify-center items-center gap-2 flex-1">
                 <HeartIcon className="w-7 h-7" /> Хадгалах
               </button>
             </div>
           </div>
           <div>
-            <Collapse title="Барааны тухай" content={product.description} />
+            <Collapse title="Барааны тухай" content={"sdfs"} />
           </div>
         </div>
       </div>
@@ -182,4 +169,21 @@ function ProductScreen() {
   );
 }
 
-export default ProductScreen;
+// export default ProductScreen;
+
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { slug } = context.params as IParams;
+  const product: Product = await getProductBySlug(slug);
+
+  return {
+    props: {
+      product,
+    },
+  };
+};
+
+export default dynamic(()=>Promise.resolve(ProductScreen),{ssr:false});
