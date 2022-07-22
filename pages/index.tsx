@@ -5,10 +5,10 @@ import Layout from "../components/Layout";
 import ProductWrapper from "../components/ProductWrapper";
 import SearchInput from "../components/SearchInput";
 import { Brand, Product,Advertising, Category } from "../typings";
-import { getProducts } from "../api/product";
-import { getBrands } from "../api/brand";
-import { getAdvertising } from "../api/advertising";
-import { getCategories } from "../api/category";
+import { getProducts } from "../util/product";
+import { getBrands } from "../util/brand";
+import { getAdvertising } from "../util/advertising";
+import { getCategories } from "../util/category";
 
 type Props = {
   products:Product[],

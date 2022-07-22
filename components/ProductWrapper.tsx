@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import React from "react";
-import { Category, Product, SubCategory } from "../typings";
+import { Category, Product,} from "../typings";
 import ProductsContainer from "./ProductsSliderContainer";
 
 type Props = {

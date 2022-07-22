@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../store";
 import { Product } from "../../typings";
 import Cookies from "js-cookie";
-import { getAllProduct } from "../../api/product";
+import { getAllProduct } from "../../util/product";
 
 const savedCartItems = Cookies.get("cart");
 

@@ -9,10 +9,10 @@ import toast from "react-hot-toast";
 import Collapse from "../../components/Collapse";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { getProductBySlug } from "../../api/product";
+import { getProductBySlug } from "../../util/product";
 import { urlFor } from "../../utils/imageOptimize";
-import ProductImageSlider from "../../components/productImageSlider";
-import dynamic from "next/dynamic";
+import ProductImageSlider from "../../components/ProductImageSlider";
+// import dynamic from "next/dynamic";
 
 type Props = {
   product: Product;
@@ -186,4 +186,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default dynamic(()=>Promise.resolve(ProductScreen),{ssr:false});
+// export default dynamic(()=>Promise.resolve(ProductScreen),{ssr:false});

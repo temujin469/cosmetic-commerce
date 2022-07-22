@@ -3,7 +3,7 @@ import {
 } from "@heroicons/react/outline";
 import classNames from "classnames";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { getCategories } from "../../api/category";
+import { getCategories } from "../../util/category";
 import { Category } from "../../typings";
 // import { categories } from "../utils/data";
 import SubMenu from "./SubMenu";
