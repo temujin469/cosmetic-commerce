@@ -169,7 +169,7 @@ function ProductScreen({ product }: Props) {
   );
 }
 
-// export default ProductScreen;
+export default ProductScreen;
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
