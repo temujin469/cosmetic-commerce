@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
-import client from "../lib/sanity";
-import { Category } from "../typings";
+import client from "../sanity";
+import { Category } from "../../typings";
 
 export const getCategories = async () => {
   const query = groq`*[_type == "cosmeticCategories"]{

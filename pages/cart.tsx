@@ -86,8 +86,8 @@ function Cart() {
                 </div>
                 <hr />
                 <div className="flex justify-between items-center">
-                  <p className="text-2xl text-gray-800">Нийт төлөх</p>
-                  <p className="text-2xl text-primary">{totalCost}₮</p>
+                  <p className="text-2xl text-gray-800 m-3">Нийт төлөх</p>
+                  <p className="text-2xl text-primary m-3">{totalCost}₮</p>
                 </div>
                 <button className="primary-button" onClick={sumbitOrder}>
                   Захиалах

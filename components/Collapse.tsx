@@ -1,9 +1,35 @@
 import React, { useState } from "react";
+import { PortableText } from "@portabletext/react";
 
 interface Props {
   title: string;
-  content: string;
+  content: {}[];
 }
+
+// const myPortableTextComponents = {
+//   types: {
+//     image: ({ value }) => <img src={value.imageUrl} />,
+//     callToAction: ({ value, isInline }) =>
+//       isInline ? (
+//         <a href={value.url}>{value.text}</a>
+//       ) : (
+//         <div className="callToAction">{value.text}</div>
+//       ),
+//   },
+
+//   marks: {
+//     link: ({ children, value }) => {
+//       const rel = !value.href.startsWith("/")
+//         ? "noreferrer noopener"
+//         : undefined;
+//       return (
+//         <a href={value.href} rel={rel}>
+//           {children}
+//         </a>
+//       );
+//     },
+//   },
+// };
 
 function Collapse({ title, content }: Props) {
   const [show, setShow] = useState<boolean>(false);
@@ -13,7 +39,9 @@ function Collapse({ title, content }: Props) {
         onClick={() => setShow(!show)}
         className="flex justify-between items-center cursor-pointer"
       >
-        <p className="text-xl font-medium md:text-2xl leading-4 text-gray-800">{title}</p>
+        <p className="text-xl font-medium md:text-2xl leading-4 text-gray-800">
+          {title}
+        </p>
         <button
           className="cursor-pointer rounded bg-gray-200 p-2"
           aria-label="show or hide"
@@ -43,7 +71,11 @@ function Collapse({ title, content }: Props) {
         }
         id="sect"
       >
-        {content}
+        {/* <PortableText
+          value={content}
+          components={myPortableTextComponents}
+        /> */}
+      description here
       </div>
     </div>
   );

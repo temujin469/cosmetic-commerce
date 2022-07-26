@@ -3,14 +3,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { A11y } from "swiper";
 import Link from "next/link";
-import { Brand } from "../typings";
 import { urlFor } from "../utils/imageOptimize";
+import { useBrands } from "../hooks/useBrands";
 
-type Props = {
-  brands:Brand[]
-}
 
-function BrandsCat({brands}:Props) {
+function BrandsCat() {
+
+  const {brands} = useBrands()
+
   return (
     <div className="px-5 pb-5 sm:pb-10 pt-0 bg-white">
       <h1 className="md:text-2xl text-xl font-medium text-gray-800 py-5">Брэндүүд</h1>

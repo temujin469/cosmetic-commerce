@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
-import client from "../lib/sanity";
-import { Product } from "../typings";
+import client from "../sanity";
+import { Product } from "../../typings";
 
 export const getProducts = async () => {
 
@@ -23,7 +23,7 @@ export const getProducts = async () => {
 
 export const getProductBySlug = async (slug:string) => {
 
-  const query = groq`*[_type=="cosmetic"]|order(_updatedAt){
+  const query = groq`*[_type=="cosmetic" && slug.current==$slug]|order(_updatedAt){
     "brand":brand->{"logo":logo.asset->,name,"slug":slug.current},
     "subCategory":category->{"slug":slug.current,name},
     "category":category->parentCategory->{"slug":slug.current,name},

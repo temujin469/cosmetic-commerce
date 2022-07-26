@@ -34,7 +34,7 @@ export default function ProductCard({ product }: Prop) {
       <div className="flex flex-col items-center justify-center p-2">
         <Link href={`/product/${product.slug}`}>
           <a>
-            <h2 className="text-lg md:text-xl">{product.name.length > 14 ? product.name.slice(0,14)+"...":product.name}</h2>
+            <h2 className="text-lg md:text-xl">{product.name.length > 14 ? product.name.slice(0,14)+"...":product.name +"/"+ product.defaultOption.name}</h2>
           </a>
         </Link>
         <p className="text-lg text-primary m-0">₮{product.defaultOption.price}</p>

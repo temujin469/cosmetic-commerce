@@ -1,35 +1,40 @@
-import { GetServerSideProps } from "next";
-import Image from "next/image";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
-import { getBrandBySlug } from "../../util/brand";
-import { getProductsByBrand } from "../../util/product";
+import { getBrandBySlug, getBrands } from "../../lib/api/brand";
+import { getProductsByBrand } from "../../lib/api/product";
 import Layout from "../../components/Layout";
 import ProductsContainer from "../../components/ProductsSliderContainer";
 import { Brand, Product } from "../../typings";
 import { urlFor } from "../../utils/imageOptimize";
+import { useProductsByBrand } from "../../hooks/useProducts";
+import { useRouter } from "next/router";
+import { useBrandBySlug } from "../../hooks/useBrands";
 
 type Props = {
-  products:Product[]
-  brand:Brand
-}
+  initProducts: Product[];
+  initBrand: Brand;
+};
 
-function brandScreen({products,brand}:Props) {
+function brandScreen({ initBrand, initProducts }: Props) {
+  const { query } = useRouter();
+  const { products } = useProductsByBrand(query.slug as string,initProducts);
+  const { brand } = useBrandBySlug(query.slug as string, initBrand);
 
   return (
     <Layout title={brand.name}>
-      <div className="p-4 relative">
-        <Image
-          className="object-cover overflow-hidden"
-          src={"/images/brand-background.jpg"}
-          width={200}
-          height={80}
-          layout="responsive"
-        />
-        <div className="left-5 bottom-5 text-white text-lg md:text-2xl md:left-8 md:bottom-8 absolute bg-black/20 flex items-center space-x-4 p-2 md:p-3 rounded">
+      <div className="p-4 relative h-[200px] md:h-[300px] lg:h-[400px]">
+        {brand.backgroundImage && (
           <img
-            src={urlFor(brand.logo).width(200).height(200).url()}
+            className="object-cover overflow-hidden h-full w-full"
+            src={urlFor(brand.backgroundImage).url()}
+          />
+        )}
+        <div className="left-7 bottom-7 text-white text-lg md:text-2xl md:left-8 md:bottom-8 absolute bg-black/20 flex items-center space-x-4 p-2 md:p-3 rounded">
+          <img
+            src={urlFor(brand.logo).width(100).height(100).url()}
             className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover"
+            alt={brand.name}
           />
           <p className="m-0">{brand.name}</p>
         </div>
@@ -64,19 +69,28 @@ function brandScreen({products,brand}:Props) {
 export default brandScreen;
 
 interface IParams extends ParsedUrlQuery {
-  slug: string
+  slug: string;
 }
 
-
-export const getServerSideProps:GetServerSideProps = async (context) => {
-  const {slug } = context.params as IParams;
-  const brand:Brand = await getBrandBySlug(slug)
-  const products:Product[] = await getProductsByBrand(slug)
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug } = params as IParams;
+  const products = await getProductsByBrand(slug);
+  const brand = await getBrandBySlug(slug);
 
   return {
-    props:{
-      brand,
-      products
-    }
-  }
-}
+    props: {
+      initProducts: products,
+      initBrand: brand,
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const brands: Brand[] = await getBrands();
+
+  return {
+    paths: brands.map((brand) => ({ params: { slug: brand.slug } })),
+
+    fallback: false,
+  };
+};

@@ -41,13 +41,15 @@ function CartItem({ cartItem }: Prop) {
     <div key={cartItem.slug} className="flex gap-2 border-b pb-2">
       <Link href={`product/${cartItem.slug}`}>
         <img
-          className="w-24 h-24 rounded-md bborder object-cover cursor-pointer"
+          className="w-[93px] h-[93px] md:w-32 md:h-32 rounded-md border object-cover cursor-pointer"
           src={cartItem.image}
         />
       </Link>
       <div className="flex flex-col justify-between flex-1">
         <div className="flex justify-between items-center">
-          <p className="text-xl text-gray-800 m-0">{cartItem.optionName}</p>
+          <Link href={`brand/${cartItem.brand.slug}`}>
+            <img className="rounded-full object-cover w-7 h-7 border" src={cartItem.brand.logo} alt={cartItem.brand.name} />
+          </Link>
           <button
             onClick={() => removeCartItemHandler(cartItem.slug)}
             className="jijig-saaral-button"
@@ -56,11 +58,17 @@ function CartItem({ cartItem }: Prop) {
           </button>
         </div>
         <div className="flex justify-start items-center">
-          <p className="text-xl text-gray-800 sm:hidden m-0">{cartItem.productName.length > 18 ? cartItem.productName.slice(0,18)+"...": cartItem.productName}</p>
-          <p className="text-xl text-gray-800 hidden sm:inline-block m-0">{cartItem.productName}</p>
+          <p className="text-xl text-gray-800 sm:hidden m-0">
+            {cartItem.productName.length > 21
+              ? cartItem.productName.slice(0, 21) + "..."
+              : cartItem.productName}
+          </p>
+          <p className="text-xl text-gray-800 hidden sm:inline-block m-0">
+            {cartItem.productName + " / " + cartItem.optionName}
+          </p>
         </div>
         <div className="flex justify-between items-center">
-          <p className="text-xl text-gray-800">{cartItem.price}₮</p>
+          <p className="text-xl text-gray-800 m-0">{cartItem.price}₮</p>
           <div className="flex items-center border justify-between max-w-[200px] rounded">
             <button
               className="md:text-2xl hover:bg-white text-xl bg-gray-200 h-7 w-7 flex items-center justify-center"

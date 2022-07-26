@@ -7,47 +7,62 @@ import { useAppDispatch } from "../../store/store";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/outline";
 import toast from "react-hot-toast";
 import Collapse from "../../components/Collapse";
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { getProductBySlug } from "../../util/product";
+import { getProductBySlug, getProducts } from "../../lib/api/product";
 import { urlFor } from "../../utils/imageOptimize";
 import ProductImageSlider from "../../components/ProductImageSlider";
-// import dynamic from "next/dynamic";
+import { useProductBySlug } from "../../hooks/useProducts";
+import { useRouter } from "next/router";
 
 type Props = {
-  product: Product;
+  initProduct: Product;
 };
+  
+// const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize';
+// const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold border-r-2 border-black  transition-all duration-200 ease-in-out capitalize';
 
-function ProductScreen({ product }: Props) {
+function ProductScreen({ initProduct }: Props) {
+  const { query } = useRouter();
+
+  const { product } = useProductBySlug(query.slug as string, initProduct);
+
   const [quantity, setQuantity] = useState<number>(1);
-  const [option, setOption] = useState<Option>(product.defaultOption);
-  const allOptions = [product.defaultOption, ...product.options];
+  // const [option, setOption] = useState<Option>(product.defaultOption);
+  const [selectedOption,setSelectedOption] = useState<Option>(product.defaultOption);
+
+  const allOptions = product.options
+    ? [product.defaultOption, ...product.options]
+    : [product.defaultOption];
 
   if (!product) {
     return <div>fending</div>;
   }
   const handleQuantity = (state: string) => {
-    if (state === "NEMEH" && quantity < option.countInStock) {
+    if (state === "NEMEH" && quantity < selectedOption.countInStock) {
       setQuantity((x) => (x += 1));
     } else if (state === "HASAH" && quantity > 1) {
       setQuantity((x) => (x -= 1));
-    } else if (option.countInStock === 0) {
+    } else if (quantity === selectedOption.countInStock) {
       toast.error(`Нөөц хүрэлцэхгүй байна`);
-    } else if (quantity === option.countInStock) {
-      toast.error(`${option.countInStock}-с дээш нөөц хүрэлцэхгүй байна`);
     } else return;
   };
   const dispatch = useAppDispatch();
 
   const addToCartHandle = () => {
-    if (option.countInStock != 0) {
+    if (selectedOption.countInStock != 0) {
       const cartItem: CartItem = {
         slug: product.slug,
-        image: urlFor(product.thumbnail).width(200).height(200).url(),
+        image: urlFor(product.thumbnail).width(180).height(180).url(),
         productName: product.name,
-        price: option.price,
-        optionName: option.name,
-        countInStock: option.countInStock,
+        price: selectedOption.price,
+        optionName: selectedOption.name,
+        countInStock: selectedOption.countInStock,
+        brand: {
+          slug: product.brand.slug,
+          name: product.brand.name,
+          logo: urlFor(product.brand.logo).width(40).height(40).url(),
+        },
         quantity,
       };
 
@@ -70,6 +85,10 @@ function ProductScreen({ product }: Props) {
       });
     }
   };
+  const handleSelect = (index:number)=> {
+    setSelectedOption(allOptions[index]);
+    // set
+  }
 
   return (
     <Layout title={product.name}>
@@ -85,7 +104,8 @@ function ProductScreen({ product }: Props) {
             {allOptions.map((option, i) => (
               <button
                 className="saaral-button"
-                onClick={() => setOption(option)}
+                key={i}
+                onClick={()=>handleSelect(i)}
               >
                 {option.name}
               </button>
@@ -111,12 +131,12 @@ function ProductScreen({ product }: Props) {
             </li>
             <li>
               <h1 className="md:text-2xl text-xl font-medium text-gray-800">
-                {product.name}
+                {`${product.name}`}
               </h1>
             </li>
             <li>
               <h1 className="md:text-2xl text-xl font-medium text-primary">
-                ₮{option.price}
+                ₮{selectedOption.price}
               </h1>
             </li>
           </ul>
@@ -145,12 +165,12 @@ function ProductScreen({ product }: Props) {
             </div>
             <div className="gap-4 flex flex-col md:flex-row">
               <button
-                disabled={option.countInStock === 0}
+                disabled={selectedOption.countInStock === 0}
                 className="primary-button flex-1 disabled:bg-primary/70"
                 onClick={addToCartHandle}
               >
                 <p className="m-0">
-                  {option.countInStock === 0
+                  {selectedOption.countInStock === 0
                     ? "бүтээгдэхүүн дууссан"
                     : "Сагсанд хийх"}
                 </p>
@@ -161,7 +181,7 @@ function ProductScreen({ product }: Props) {
             </div>
           </div>
           <div>
-            <Collapse title="Барааны тухай" content={"sdfs"} />
+            <Collapse title="Барааны тухай" content={product.description} />
           </div>
         </div>
       </div>
@@ -175,15 +195,25 @@ interface IParams extends ParsedUrlQuery {
   slug: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { slug } = context.params as IParams;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug } = params as IParams;
   const product: Product = await getProductBySlug(slug);
 
   return {
     props: {
-      product,
+      initProduct: product,
     },
   };
 };
 
 // export default dynamic(()=>Promise.resolve(ProductScreen),{ssr:false});
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const products: Product[] = await getProducts();
+
+  return {
+    paths: products.map((product) => ({ params: { slug: product.slug } })),
+
+    fallback: false,
+  };
+};
