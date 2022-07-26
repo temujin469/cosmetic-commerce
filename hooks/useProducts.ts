@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { Product } from "../typings";
 
 
-export const useProducts = (initData:Product[] | undefined)=>{
+export const useProducts = (initData?:Product[])=>{
   const {data,error}= useSWR<Product[]>('/api/products',{fallbackData:initData});
   
   return {

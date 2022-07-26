@@ -1,14 +1,10 @@
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useProducts } from "../hooks/useProducts";
-import { Category, Product } from "../typings";
+import { Product } from "../typings";
 import ProductsContainer from "./ProductsSliderContainer";
 import { useCategories } from "../hooks/useCategories";
 
-type Props = {
-  // products: Product[];
-  categories: Category[];
-};
 
 function ProductWrapper() {
   const { products } = useProducts();
